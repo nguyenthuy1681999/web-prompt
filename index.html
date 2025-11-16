@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="vi">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trình Tạo Prompt Infographic</title>
+  <script src="./main.js"></script>
+  <link rel="stylesheet" href="./styles.css"> 
+  <style>@view-transition { navigation: auto; }</style>
+  
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="container">
+   <header class="header">
+    <h1 class="site-title" id="siteTitle">Trình Tạo Prompt Infographic AI</h1>
+    <p class="site-description" id="siteDescription">Tạo prompt chuyên nghiệp cho ChatGPT để sinh infographic đẹp mắt và hiệu quả</p>
+   </header>
+   <div class="tabs-container">
+    <div class="tabs-header"><button class="tab-button active" onclick="switchTab('education',event)"> 📚 Giáo dục - Tuyên truyền - Nâng cao nhận thức </button> <button class="tab-button" onclick="switchTab('communication',event)"> 📢 Truyền thông - Quảng bá sự kiện </button>
+    </div><!-- Tab Giáo dục -->
+    <div id="education-tab" class="tab-content active">
+     <form id="education-form">
+      <div class="form-section">
+       <h3 class="section-title">🎯 Chọn dạng infographic</h3>
+       <div class="type-selector">
+        <div class="type-card" onclick="selectType('education', 'timeline', event)">
+         <div class="type-icon">
+          ⏰
+         </div>
+         <div class="type-name">
+          Timeline
+         </div>
+         <div class="type-description">
+          Trình bày theo thời gian, quá trình phát triển 
+         </div>
+        </div>
+        <div class="type-card" onclick="selectType('education', 'comparison', event)"> 
+         <div class="type-icon">
+          ⚖️
+         </div>
+         <div class="type-name">
+          So sánh
+         </div>
+         <div class="type-description">
+          Đối chiếu, phân tích ưu nhược điểm
+         </div>
+        </div>
+        <div class="type-card" onclick="selectType('education', 'summary', event)">
+         <div class="type-icon">
+          📊
+         </div>
+         <div class="type-name">
+          Tổng hợp
+         </div>
+         <div class="type-description">
+          Thống kê, báo cáo, dữ liệu tổng quan
+         </div>
+        </div>
+       </div>
+      </div><!-- Thông báo khi chọn dạng -->
+      <div class="form-notice" id="edu-form-notice">
+       ✨ Vui lòng chọn một dạng infographic ở trên để hiển thị form thông tin chi tiết!
+      </div><!-- Form riêng cho Timeline -->
+      <div class="form-section type-specific-form" id="edu-timeline-form" style="display: none;">
+       <h3 class="section-title">⏰ Thông tin Timeline</h3>
+       <div class="form-group"><label class="form-label">Chủ đề chính </label> <input type="text" class="form-input" id="edu-timeline-period" placeholder="VD: 2020-2024, Thế kỷ 21, 1000 năm lịch sử...">
+       </div>
+       <div class="form-group"><label class="form-label">Mục tiêu truyền thông </label> <textarea class="form-textarea" id="edu-timeline-events" placeholder="VD: 
+Truyền tin 
+Nâng cao nhận thức "></textarea>
+       </div>
+       <div class="form-group"><label class="form-label">Đối tượng khán giả</label> <select class="form-input" id="edu-timeline-milestones" placeholder="VD:
+        <select class="form-select" id="edu-timeline-audience"> 
+              <option value="">Chọn</option>
+              <option value="học sinh trung học">khán giả </option> 
+              <option value="sinh viên đại học">Sinh viên đại học</option>  
+              <option value="chuyên gia">Chuyên gia</option> </select>
+       </div>
+       <div class="form-group"><label class="form-label"> Mốc thời gian cụ thể</label> <input type="text" class="form-input" id="edu-timeline-period" placeholder="VD: Năm 2020 - Dự án khởi động, Năm 2022 - Đạt mốc quan trọng...">
+       </div>
+
+       <div class="form-group"><label class="form-label">Mối liên hệ giữa mốc thời gian </label>
+        <select class="form-input" id="edu-timeline-events">
+              <option value="">Chọn mối liên hệ</option> 
+              <option value="nguyên nhân - kết quả">Nguyên nhân - Kết quả</option> 
+              <option value="tiến triển - phát triển">Tiến triển - Phát triển</option> 
+              <option value=" hỗ trợ - bổ sung">Hỗ trợ - Bổ sung</option>
+              <option value="thay đổi - cải tiến">Thay đổi - Cải tiến</option> 
+        </select>
+       </div>
+       <div class="form-group"><label class="form-label">Kết luận thông điệp </label> <textarea class="form-textarea" id="edu-timeline-conclusion" placeholder="VD: Câu chuyện truyền cảm hứng"></textarea>
+       </div>
+       <div class="form-group"><label class="form-label"> Giọng điệu </label>
+        <select class=" form-input" id="edu-timeline-emotion">
+              <option value="">Chọn giọng điệu</option> 
+              <option value="truyền cảm hứng">Truyền cảm hứng</option> 
+              <option value="thông tin">Thông tin</option> 
+              <option value="thuyết phục">Thuyết phục</option> 
+              <option value="giải trí">Giải trí</option> 
+        </select>
+       </div> 
+       <div class="form-group"><label class="form-label"> Yêu cầu thiết kế bố cục </label>
+        <select class="form-input" id="edu-timeline-layout">
+              <option value="">Chọn bố cục</option>
+              <option value="theo chiều dọc">Theo chiều dọc</option> 
+              <option value="theo chiều ngang">Theo chiều ngang</option>
+              <option value="theo hình ziczac">Theo hình ziczac</option> 
+              <option value="theo vòng tròn">Theo vòng tròn</option>
+       </select>
+       </div>
+       <div class="form-group"><label class="form-label"> Màu chủ đạo </label> 
+            <input type="checkbox" name="color" value="xanh dương"> Xanh dương <br>
+            <input type="checkbox" name="color" value="đỏ"> Đỏ <br>
+            <input type="checkbox" name="color" value="xanh lá"> Xanh lá <br>
+            <input type="checkbox" name="color" value="vàng"> Vàng <br>
+       </div>
+       <div class="form-group"><label class="form-label"> Biểu tượng minh họa</label> <textarea class="form-textarea" id="edu-timeline-icons" placeholder="VD: Mốc thời gian, Sự kiện quan trọng, Hành động cần thiết..."></textarea>
+       </div>
+      </div><!-- Form riêng cho So sánh -->
+      <div class="form-section type-specific-form" id="edu-comparison-form" style="display: none;">
+       <h3 class="section-title">⚖️ Thông tin So sánh</h3>
+       <div class="form-group"><label class="form-label">Đối tượng so sánh 1</label> <input type="text" class="form-input" id="edu-compare-item1" placeholder="VD: Năng lượng tái tạo">
+       </div>
+       <div class="form-group"><label class="form-label">Đối tượng so sánh 2</label> <input type="text" class="form-input" id="edu-compare-item2" placeholder="VD: Năng lượng hóa thạch">
+       </div>
+       <div class="form-group"><label class="form-label">Tiêu chí so sánh</label> <textarea class="form-textarea" id="edu-compare-criteria" placeholder="VD: 
+ Chi phí đầu tư
+ Tác động môi trường  
+ Hiệu quả sử dụng
+ Tính bền vững"></textarea>
+       </div>
+       <div class="form-group"><label class="form-label">Ưu/Nhược điểm từng bên</label> <textarea class="form-textarea" id="edu-compare-details" placeholder="VD: Năng lượng tái tạo: Ưu điểm - sạch, bền vững; Nhược điểm - chi phí cao ban đầu..."></textarea></div>
+       <div class="form-group"><label class="form-label">Kết luận/Khuyến nghị</label> <textarea class="form-textarea" id="edu-compare-conclusion" placeholder="VD: Nên ưu tiên phát triển năng lượng tái tạo trong dài hạn..."></textarea></div>
+       <div class="form-group"><label class="form-label">Kết luận thông điệp </label> <textarea class="form-textarea" id="edu-timeline-conclusion" placeholder="VD: Câu chuyện truyền cảm hứng"></textarea>
+       </div>
+       <div class="form-group"><label class="form-label"> Giọng điệu </label>
+        <select class=" form-input" id="edu-timeline-emotion">
+              <option value="">Chọn giọng điệu</option> 
+              <option value="truyền cảm hứng">Truyền cảm hứng</option> 
+              <option value="thông tin">Thông tin</option> 
+              <option value="thuyết phục">Thuyết phục</option> 
+              <option value="giải trí">Giải trí</option> 
+        </select>
+       </div> 
+       <div class="form-group"><label class="form-label"> Yêu cầu thiết kế bố cục </label>
+        <select class="form-input" id="edu-timeline-layout">
+              <option value="">Chọn bố cục</option>
+              <option value="theo chiều dọc">Theo chiều dọc</option> 
+              <option value="theo chiều ngang">Theo chiều ngang</option>
+              <option value="theo hình ziczac">Theo hình ziczac</option> 
+              <option value="theo vòng tròn">Theo vòng tròn</option>
+        </select>
+       </div>
+       <div class="form-group"><label class="form-label"> Màu chủ đạo </label> 
+            <input type="checkbox" name="color" value="xanh dương"> Xanh dương <br>
+            <input type="checkbox" name="color" value="đỏ"> Đỏ <br>
+            <input type="checkbox" name="color" value="xanh lá"> Xanh lá <br>
+            <input type="checkbox" name="color" value="vàng"> Vàng <br>
+       </div>
+      </div>
+      <!-- Form riêng cho Tổng hợp -->
+      <div class="form-section type-specific-form" id="edu-summary-form" style="display: none;">
+       <h3 class="section-title">📊 Thông tin Tổng hợp</h3>
+       <div class="form-group"><label class="form-label">Nội dung cần hiển thị </label> <textarea class="form-textarea" id="edu-summary-type" placeholder="VD: Thống kê dân số, Báo cáo môi trường, Kết quả khảo sát..."></textarea>
+       </div>
+       <div class="form-group"><label class="form-label">Số liệu chính</label> <textarea class="form-textarea" id="edu-summary-data" placeholder="VD: 
+85% người dân ủng hộ
+Tăng trưởng 12% so với năm trước
+1.2 triệu người tham gia
+Giảm 30% lượng khí thải"></textarea>
+       </div>
+       <div class="form-group"><label class="form-label">Phân loại/Nhóm dữ liệu</label> <textarea class="form-textarea" id="edu-summary-categories" placeholder="VD: Theo độ tuổi, theo vùng miền, theo ngành nghề, theo thời gian..."></textarea>
+       </div>
+       <div class="form-group"><label class="form-label">Insight/Phát hiện quan trọng</label> <textarea class="form-textarea" id="edu-summary-insights" placeholder="VD: Giới trẻ có xu hướng..., Vùng nông thôn cần..., Cần tăng cường..."></textarea>
+       </div>
+       <div class="form-group"><label class="form-label">Nguồn dữ liệu</label> <input type="text" class="form-input" id="edu-summary-source" placeholder="VD: Tổng cục Thống kê, Khảo sát của ABC, Báo cáo XYZ 2024...">
+       </div>
+       <div class="form-group"><label class="form-label"> Mối quan hệ giữa các phần </label> <select class="form-input" id="edu-timeline-events">
+              <option value="">Chọn mối liên hệ</option> 
+              <option value="nguyên nhân - kết quả">Nguyên nhân - Kết quả</option> 
+              <option value="tiến triển - phát triển">Tiến triển - Phát triển</option> 
+              <option value=" hỗ trợ - bổ sung">Hỗ trợ - Bổ sung</option>
+              <option value="thay đổi - cải tiến">Thay đổi - Cải tiến</option> </select>
+       </div>
+      <div class="form-group"><label class="form-label">Kết luận thông điệp </label> <textarea class="form-textarea" id="edu-timeline-conclusion" placeholder="VD: Câu chuyện truyền cảm hứng"></textarea>
+       </div>
+       <div class="form-group"><label class="form-label"> Giọng điệu </label>
+        <select class=" form-input" id="edu-timeline-emotion">
+              <option value="">Chọn giọng điệu</option> 
+              <option value="truyền cảm hứng">Truyền cảm hứng</option> 
+              <option value="thông tin">Thông tin</option> 
+              <option value="thuyết phục">Thuyết phục</option> 
+              <option value="giải trí">Giải trí</option> 
+        </select>
+       </div> 
+       <div class="form-group"><label class="form-label"> Yêu cầu thiết kế bố cục </label>
+        <select class="form-input" id="edu-timeline-layout">
+              <option value="theo chiều dọc">Theo chiều dọc</option> 
+              <option value="theo chiều ngang">Theo chiều ngang</option>
+              <option value="theo hình ziczac">Theo hình ziczac</option> 
+              <option value="theo vòng tròn">Theo vòng tròn</option>
+       </select>
+       </div>
+       <div class="form-group"><label class="form-label"> Màu chủ đạo </label> 
+            <input type="checkbox" name="color" value="xanh dương"> Xanh dương <br>
+            <input type="checkbox" name="color" value="đỏ"> Đỏ <br>
+            <input type="checkbox" name="color" value="xanh lá"> Xanh lá <br>
+            <input type="checkbox" name="color" value="vàng"> Vàng <br>
+       </div>
+       <div class="form-group"><label class="form-label"> Biểu tượng minh họa</label> <textarea class="form-textarea" id="edu-timeline-icons" placeholder="VD: Mốc thời gian, Sự kiện quan trọng, Hành động cần thiết..."></textarea>
+       </div>
+      </div>
+     </form>
+    </div><!-- Tab Truyền thông -->
+    <div id="communication-tab" class="tab-content">
+     <form id="communication-form">
+      <div class="form-section">
+       <h3 class="section-title">🎯 Chọn dạng infographic</h3>
+       <div class="type-selector">
+        <div class="type-card" onclick="selectType('communication', 'news', event)">
+         <div class="type-icon">
+          📰
+         </div>
+         <div class="type-name">
+          Tin tức
+         </div>
+         <div class="type-description">
+          Thông báo, cập nhật thông tin mới
+         </div>
+        </div>
+        <div class="type-card" onclick="selectType('communication', 'timeline', event)">
+         <div class="type-icon">
+          📅
+         </div>
+         <div class="type-name">
+          Timeline
+         </div>
+         <div class="type-description">
+          Lịch trình sự kiện, chương trình
+         </div>
+        </div>
+        <div class="type-card" onclick="selectType('communication', 'comparison', event)"> 
+         <div class="type-icon">
+          ⚖️
+         </div>
+         <div class="type-name">
+          So sánh
+         </div>
+         <div class="type-description">
+          Đối chiếu, phân tích ưu nhược điểm
+         </div>
+        </div>
+        <div class="type-card" onclick="selectType('communication', 'profile', event)">
+         <div class="type-icon">
+          👤
+         </div>
+         <div class="type-name">
+          Profile
+         </div>
+         <div class="type-description">
+          Giới thiệu nhân vật, tổ chức
+         </div>
+        </div>
+       </div>
+      </div>
+      <!-- Thông báo khi chọn dạng -->
+      <div class="form-notice" id="comm-form-notice">
+       ✨ Vui lòng chọn một dạng infographic ở trên để hiển thị form thông tin chi tiết!
+      </div><!-- Form riêng cho Tin tức -->
+      <div class="form-section type-specific-form" id="comm-news-form" style="display: none;">
+       <h3 class="section-title">📰 Thông tin Tin tức</h3>
+       <div class="form-group"><label class="form-label">Đối tượng khán giả</label> </div>
+       <div class="form-group"><label class="form-label">Bối cảnh </label> <textarea class="form-textarea" id="comm-news-context"></textarea> </div>
+       <div class="form-group"><label class="form-label">Tiêu đề chính</label> <input type="text" class="form-input" id="comm-news-headline" placeholder="VD: Ra mắt sản phẩm mới, Thông báo quan trọng...">
+       </div>
+       <div class="form-group"><label class="form-label">Nội dung tin tức</label> <textarea class="form-textarea" id="comm-news-content" placeholder="VD: Thông tin chi tiết về sự kiện, thay đổi, cập nhật mới..."></textarea>
+       </div>
+       <div class="form-group"><label class="form-label">Số liệu/kết quả đáng chú ý </label><textarea class="form-textarea" id="comm-news-data"></textarea> </div>
+       <div class="form-group"><label class="form-label">Thời gian/Ngày tháng</label> <input type="text" class="form-input" id="comm-news-date" placeholder="VD: 15/12/2024, Tháng 12/2024, Quý 4/2024...">
+       </div>
+       <div class="form-group"><label class="form-label">Thông điệp chính </label> <textarea class="form-textarea" id="comm-news-mainidea" placeholder="VD: Lợi ích cho khách hàng, thay đổi tích cực, cơ hội mới..."></textarea>
+       </div>
+       <div class="form-group"><label class="form-label">Nhân vật/ Hoạt động</label> <input type="text" class="form-input" id="comm-news-character" placeholder="VD: Hoạt động tình nguyện, Nguyễn Enny...">
+       </div>
+       <div class="form-group"><label class="form-label">Thông tin liên hệ</label> <input type="text" class="form-input" id="comm-news-contact" placeholder="VD: Hotline, Email, Website để biết thêm chi tiết...">
+       </div>
+       <div class="form-group"><label class="form-label">Kết luận thông điệp </label> <textarea class="form-textarea" id="comm-timeline-conclusion" placeholder="VD: Câu chuyện truyền cảm hứng"></textarea>
+       </div>
+       <div class="form-group"><label class="form-label">Kêu gọi hành động </label> <input type="text" class="form-input" id="comm-news-action" placeholder="VD: cắt giảm rác thải...">
+       </div>
+       <div class="form-group"><label class="form-label"> Giọng điệu </label>
+        <select class=" form-input" id="comm-timeline-emotion">
+              <option value="">Chọn giọng điệu</option> 
+              <option value="truyền cảm hứng">Truyền cảm hứng</option> 
+              <option value="thông tin">Thông tin</option> 
+              <option value="thuyết phục">Thuyết phục</option> 
+              <option value="giải trí">Giải trí</option> 
+        </select>
+       </div> 
+       <div class="form-group"><label class="form-label"> Yêu cầu thiết kế bố cục </label>
+        <select class="form-input" id="comm-timeline-layout">
+              <option value="">Chọn bố cục</option>
+              <option value="báo"> Báo </option> 
+              <option value="poster">Poster</option>
+              <option value="Website">Website</option> 
+       </select>
+       </div>
+       <div class="form-group"><label class="form-label"> Màu chủ đạo </label> 
+            <input type="checkbox" name="color" value="xanh dương"> Xanh dương <br>
+            <input type="checkbox" name="color" value="đỏ"> Đỏ <br>
+            <input type="checkbox" name="color" value="xanh lá"> Xanh lá <br>
+            <input type="checkbox" name="color" value="vàng"> Vàng <br>
+       </div>
+       <div class="form-group"><label class="form-label"> Biểu tượng minh họa</label> <textarea class="form-textarea" id="comm-timeline-icons" placeholder="VD: Mốc thời gian, Sự kiện quan trọng, Hành động cần thiết..."></textarea>
+       </div>
+      </div><!-- Form riêng cho Timeline -->
+      <div class="form-section type-specific-form" id="comm-timeline-form" style="display: none;">
+       <h3 class="section-title">📅 Lịch trình Timeline</h3>
+       <div class="form-group"><label class="form-label">Thời gian tổng thể</label> <input type="text" class="form-input" id="comm-timeline-duration" placeholder="VD: 3 ngày, 1 tuần, 1 tháng...">
+       </div>
+       <div class="form-group"><label class="form-label">Lịch trình chi tiết</label> <textarea class="form-textarea" id="comm-timeline-schedule" placeholder="VD: 
+Ngày 1: Khai mạc và giới thiệu
+Ngày 2: Hội thảo chuyên đề
+Ngày 3: Networking và bế mạc"></textarea>
+       </div>
+       <div class="form-group"><label class="form-label">Địa điểm</label> <input type="text" class="form-input" id="comm-timeline-venue" placeholder="VD: Trung tâm Hội nghị ABC, Online, Hybrid...">
+       </div>
+       <div class="form-group"><label class="form-label">Diễn giả/Khách mời</label> <textarea class="form-textarea" id="comm-timeline-speakers" placeholder="VD: CEO XYZ, Chuyên gia ABC, Nghệ sĩ nổi tiếng..."></textarea>
+       </div>
+       <div class="form-group"><label class="form-label">Hoạt động đặc biệt</label> <textarea class="form-textarea" id="comm-timeline-activities" placeholder="VD: Workshop, Triển lãm, Biểu diễn, Trao giải..."></textarea>
+       </div>
+       <div class="form-group"><label class="form-label">Kết luận thông điệp </label> <textarea class="form-textarea" id="comm-timeline-conclusion" placeholder="VD: Câu chuyện truyền cảm hứng"></textarea>
+       </div>
+       <div class="form-group"><label class="form-label"> Giọng điệu </label>
+        <select class=" form-input" id="comm-timeline-emotion">
+              <option value="">Chọn giọng điệu</option> 
+              <option value="truyền cảm hứng">Truyền cảm hứng</option> 
+              <option value="thông tin">Thông tin</option> 
+              <option value="thuyết phục">Thuyết phục</option> 
+              <option value="giải trí">Giải trí</option> 
+        </select>
+       </div> 
+       <div class="form-group"><label class="form-label"> Hình thức dòng thời gian </label>
+        <select class="form-input" id="comm-timeline-layout">
+              <option value="">Dòng thời gian</option>
+              <option value="theo chiều dọc">Theo chiều dọc</option> 
+              <option value="theo chiều ngang">Theo chiều ngang</option>
+              <option value="theo hình ziczac">Theo phân nhánh</option> 
+              <option value="theo vòng tròn">Theo vòng tròn</option>
+       </select>
+       </div>
+       <div class="form-group"><label class="form-label"> Màu chủ đạo </label> 
+            <input type="checkbox" name="color" value="xanh dương"> Xanh dương <br>
+            <input type="checkbox" name="color" value="đỏ"> Đỏ <br>
+            <input type="checkbox" name="color" value="xanh lá"> Xanh lá <br>
+            <input type="checkbox" name="color" value="vàng"> Vàng <br>
+       </div>
+       <div class="form-group"><label class="form-label"> Biểu tượng minh họa</label> <textarea class="form-textarea" id="comm-timeline-icons" placeholder="VD: Mốc thời gian, Sự kiện quan trọng, Hành động cần thiết..."></textarea>
+       </div>
+      </div><!-- Form riêng cho So sánh &gt;-->
+      <div class="form-section type-specific-form" id="comm-comparison-form" style="display: none;">
+       <h3 class="section-title">⚖️ Thông tin So sánh</h3>
+       <div class="form-group"><label class="form-label">Đối tượng so sánh 1</label> <input type="text" class="form-input" id="comm-compare-item1" placeholder="VD: Năng lượng tái tạo">
+       </div>
+       <div class="form-group"><label class="form-label">Đối tượng so sánh 2</label> <input type="text" class="form-input" id="comm-compare-item2" placeholder="VD: Năng lượng hóa thạch">
+       </div>
+       <div class="form-group"><label class="form-label">Quy mô tham dự/ Phạm vi tổ chức(nếu có)</label> <input type="text" class="form-input" id="comm-compare-scale" placeholder="VD: Toàn quốc, Khu vực miền Bắc, 500 người...">
+      </div>
+       <div class="form-group"><label class="form-label">Tiêu chí so sánh</label> <textarea class="form-textarea" id="comm-compare-criteria" placeholder="VD: 
+- Chi phí đầu tư
+- Tác động môi trường  
+- Hiệu quả sử dụng
+- Tính bền vững"></textarea>
+       </div>
+       <div class="form-group"><label class="form-label">Ưu/Nhược điểm từng bên</label> <textarea class="form-textarea" id="comm-compare" placeholder="VD: Năng lượng tái tạo: Ưu điểm - sạch, bền vững; Nhược điểm - chi phí cao ban đầu..."></textarea>
+       </div>
+       <div class="form-group"><label class="form-label">Điểm khác </label> <textarea class="form-textarea" id="comm-compare-difference" placeholder="VD: Nên ưu tiên phát triển năng lượng tái tạo trong dài hạn..."></textarea>
+       </div>
+       <div class="form-group"><label class="form-label">Kết luận thông điệp </label> <textarea class="form-textarea" id="comm-timeline-conclusion" placeholder="VD: Câu chuyện truyền cảm hứng"></textarea>
+       </div>
+       <div class="form-group"><label class="form-label"> Giọng điệu </label>
+        <select class=" form-input" id="comm-timeline-emotion">
+              <option value="">Chọn giọng điệu</option> 
+              <option value="truyền cảm hứng">Truyền cảm hứng</option> 
+              <option value="thông tin">Thông tin</option> 
+              <option value="thuyết phục">Thuyết phục</option> 
+              <option value="giải trí">Giải trí</option> 
+        </select>
+       </div> 
+       <div class="form-group"><label class="form-label"> Yêu cầu thiết kế bố cục </label>
+        <select class="form-input" id="comm-timeline-layout">
+              <option value="">Chọn bố cục</option>
+              <option value="theo chiều dọc">Theo chiều dọc</option> 
+              <option value="theo chiều ngang">Theo chiều ngang</option>
+              <option value="theo hình ziczac">Theo hình ziczac</option> 
+              <option value="theo vòng tròn">Theo vòng tròn</option>
+       </select>
+       </div>
+       <div class="form-group"><label class="form-label"> Màu chủ đạo </label> <textarea class="form-textarea" id="comm-timeline-color" placeholder="VD: Xanh dương - chuyên nghiệp, Cam - năng động..."></textarea>
+       </div>
+       <div class="form-group"><label class="form-label"> Biểu tượng minh họa</label> <textarea class="form-textarea" id="comm-timeline-icons" placeholder="VD: Mốc thời gian, Sự kiện quan trọng, Hành động cần thiết..."></textarea>
+       </div>
+      </div><!-- Form riêng cho Profile -->
+       <div class="form-section type-specific-form" id="comm-profile-form" style="display: none;">
+       <h3 class="section-title">👤 Thông tin Profile</h3>
+       <div class="form-group"><label class="form-label">Tên cá nhân/Tổ chức</label> <input type="text" class="form-input" id="comm-profile-name" placeholder="VD: Nguyễn Văn A, Công ty XYZ, Tổ chức ABC...">
+       </div>
+       <div class="form-group"><label class="form-label"> ngày tháng năm sinh </label> <input type="date" class="form-input" id="comm-profile-date"> </div>
+       <div class="form-group"><label class="form-label">Chức vụ/Vai trò</label> <input type="text" class="form-input" id="comm-profile-position" placeholder="VD: CEO, Chuyên gia, Nghệ sĩ, Tổ chức phi lợi nhuận...">
+       </div>
+       <div class="form-group"><label class="form-label">Thành tích nổi bật</label> <textarea class="form-textarea" id="comm-profile-achievements" placeholder="VD: 
+- 10 năm kinh nghiệm
+- Giải thưởng ABC 2023
+- Dẫn dắt 100+ dự án thành công
+- Tác giả 5 cuốn sách bestseller"></textarea>
+       </div>
+       <div class="form-group"><label class="form-label">Lĩnh vực hoạt động</label> <input type="text" class="form-input" id="comm-profile-field" placeholder="VD: Công nghệ, Nghệ thuật, Giáo dục, Phi lợi nhuận...">
+       </div>
+       <div class="form-group"><label class="form-label">Hành trình sự nghiệp</label> <textarea class="form-textarea" id="comm-profile-experience" placeholder="VD: Chuyên gia marketing, Nghệ sĩ âm nhạc, Nhà đầu tư startup..."></textarea>
+       </div>
+       <div class="form-group"><label class="form-label">Thông tin liên hệ</label> <input type="text" class="form-input" id="comm-profile-contact" placeholder="VD: LinkedIn, Website, Email, Social media...">
+       </div>
+       <div class="form-group"><label class="form-label">Điểm nhấn, cá tính riêng</label> <input type="text" class="form-input" id="comm-profile-quote" placeholder="VD: 'Thành công đến từ sự kiên trì và đam mê'">
+       </div>
+       <div class="form-group"><label class="form-label">Kết luận thông điệp </label> <textarea class="form-textarea" id="edu-timeline-conclusion" placeholder="VD: Câu chuyện truyền cảm hứng"></textarea>
+       </div>
+       <div class="form-group"><label class="form-label"> Giọng điệu </label>
+        <select class=" form-input" id="edu-timeline-emotion">
+              <option value="">Chọn giọng điệu</option> 
+              <option value="truyền cảm hứng">Truyền cảm hứng</option> 
+              <option value="thông tin">Thông tin</option> 
+              <option value="thuyết phục">Thuyết phục</option> 
+              <option value="giải trí">Giải trí</option> 
+        </select>
+       </div> 
+       <div class="form-group"><label class="form-label"> Yêu cầu thiết kế bố cục </label>
+        <select class="form-input" id="edu-timeline-layout">
+              <option value="">Chọn bố cục</option>
+              <option value="theo chiều dọc">Theo chiều dọc</option> 
+              <option value="theo chiều ngang">Theo chiều ngang</option>
+              <option value="theo hình ziczac">Theo hình ziczac</option> 
+              <option value="theo vòng tròn">Theo vòng tròn</option>
+       </select>
+       </div>
+       <div class="form-group"><label class="form-label"> Màu chủ đạo </label> 
+            <input type="checkbox" name="color" value="xanh dương"> Xanh dương <br>
+            <input type="checkbox" name="color" value="đỏ"> Đỏ <br>
+            <input type="checkbox" name="color" value="xanh lá"> Xanh lá <br>
+            <input type="checkbox" name="color" value="vàng"> Vàng <br>
+       <div class="form-group"><label class="form-label"> Biểu tượng minh họa</label> <textarea class="form-textarea" id="edu-timeline-icons" placeholder="VD: Mốc thời gian, Sự kiện quan trọng, Hành động cần thiết..."></textarea>
+       </div>
+      </div>
+      </div>
+     </form>
+    </div>
+   </div>
+   <div class="generate-section"><button class="generate-btn" id="generateBtn" onclick="generatePrompt()"> <span id="generateBtnText">🚀 Tạo Prompt Infographic</span> </button>
+    <p style="color: #718096; margin: 0;">Nhấn để tạo prompt chuyên nghiệp cho ChatGPT</p>
+   </div>
+   <div class="result-section" id="resultSection">
+    <h3 class="result-title">✨ Prompt đã tạo</h3>
+    <div class="prompt-output" id="promptOutput"></div><button class="copy-btn" id="copyBtn" onclick="copyPrompt()"> 📋 Sao chép Prompt </button>
+   </div>
+  </div>
+
+<script src="script.js" type="text/javascript"></script>
+   </body>
+</html>

@@ -1,0 +1,318 @@
+ body {
+     box-sizing: border-box;
+     margin: 0;
+     padding: 0;
+     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+     min-height: 100%;
+     color: #333;
+ }
+
+ .container {
+     max-width: 1200px;
+     margin: 0 auto;
+     padding: 20px;
+ }
+
+ .header {
+     text-align: center;
+     background: white;
+     padding: 40px 30px;
+     border-radius: 20px;
+     margin-bottom: 30px;
+     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+ }
+
+ .site-title {
+     font-size: 2.8rem;
+     font-weight: bold;
+     color: #2d3748;
+     margin-bottom: 15px;
+     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+     -webkit-background-clip: text;
+     -webkit-text-fill-color: transparent;
+     background-clip: text;
+ }
+
+ .site-description {
+     font-size: 1.2rem;
+     color: #718096;
+     margin-bottom: 0;
+ }
+
+ .tabs-container {
+     background: white;
+     border-radius: 20px;
+     overflow: hidden;
+     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+     margin-bottom: 30px;
+ }
+
+ .tabs-header {
+     display: flex;
+     background: #f8fafc;
+     border-bottom: 2px solid #e2e8f0;
+ }
+
+ .tab-button {
+     flex: 1;
+     padding: 20px;
+     background: none;
+     border: none;
+     font-size: 1.1rem;
+     font-weight: 600;
+     color: #718096;
+     cursor: pointer;
+     transition: all 0.3s ease;
+     position: relative;
+ }
+
+ .tab-button.active {
+     color: #667eea;
+     background: white;
+ }
+
+ .tab-button.active::after {
+     content: '';
+     position: absolute;
+     bottom: -2px;
+     left: 0;
+     right: 0;
+     height: 3px;
+     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+ }
+
+ .tab-content {
+     display: none;
+     padding: 30px;
+ }
+
+ .tab-content.active {
+     display: block;
+ }
+
+ .form-section {
+     margin-bottom: 30px;
+ }
+
+ .section-title {
+     font-size: 1.4rem;
+     font-weight: bold;
+     color: #2d3748;
+     margin-bottom: 20px;
+     display: flex;
+     align-items: center;
+     gap: 10px;
+ }
+
+ .form-group {
+     margin-bottom: 20px;
+ }
+
+ .form-label {
+     display: block;
+     font-weight: 600;
+     color: #68604a;
+     margin-bottom: 8px;
+     font-size: 1rem;
+ }
+
+ .form-input,
+ .form-select,
+ .form-textarea {
+     width: 100%;
+     padding: 12px 16px;
+     border: 2px solid #7189a7;
+     border-radius: 10px;
+     font-size: 1rem;
+     transition: all 0.3s ease;
+     background: white;
+ }
+
+ .form-input:focus,
+ .form-select:focus,
+ .form-textarea:focus {
+     outline: none;
+     border-color: #667eea;
+     box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+ }
+
+ .form-textarea {
+     resize: vertical;
+     min-height: 100px;
+ }
+
+ .type-selector {
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+     gap: 15px;
+     margin-bottom: 20px;
+ }
+
+ .type-card {
+     background: #f8fafc;
+     border: 2px solid #e2e8f0;
+     border-radius: 12px;
+     padding: 20px;
+     cursor: pointer;
+     transition: all 0.3s ease;
+     text-align: center;
+ }
+
+ .type-card:hover {
+     border-color: #667eea;
+     transform: translateY(-2px);
+     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+ }
+
+ .type-card.selected {
+     border-color: #667eea;
+     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+     color: white;
+ }
+
+ .type-icon {
+     font-size: 2rem;
+     margin-bottom: 10px;
+ }
+
+ .type-name {
+     font-weight: 600;
+     margin-bottom: 5px;
+ }
+
+ .type-description {
+     font-size: 0.9rem;
+     opacity: 0.8;
+ }
+
+ .generate-section {
+     background: #f8fafc;
+     padding: 30px;
+     border-radius: 15px;
+     text-align: center;
+ }
+
+ .form-notice {
+     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+     color: white;
+     padding: 15px 20px;
+     border-radius: 10px;
+     margin-bottom: 20px;
+     font-weight: 600;
+     text-align: center;
+     display: none;
+ }
+
+ .form-notice.show {
+     display: block;
+     animation: slideDown 0.3s ease;
+ }
+
+ .type-specific-form {
+     transition: all 0.3s ease;
+ }
+
+ @keyframes slideDown {
+     from {
+         opacity: 0;
+         transform: translateY(-10px);
+     }
+
+     to {
+         opacity: 1;
+         transform: translateY(0);
+     }
+ }
+
+ .generate-btn {
+     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+     color: white;
+     border: none;
+     padding: 15px 40px;
+     font-size: 1.1rem;
+     font-weight: 600;
+     border-radius: 25px;
+     cursor: pointer;
+     transition: all 0.3s ease;
+     margin-bottom: 20px;
+ }
+
+ .generate-btn:hover {
+     transform: translateY(-2px);
+     box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+ }
+
+ .generate-btn:disabled {
+     opacity: 0.6;
+     cursor: not-allowed;
+     transform: none;
+ }
+
+ .result-section {
+     background: white;
+     border-radius: 15px;
+     padding: 30px;
+     margin-top: 30px;
+     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+     display: none;
+ }
+
+ .result-title {
+     font-size: 1.3rem;
+     font-weight: bold;
+     color: #2d3748;
+     margin-bottom: 15px;
+     display: flex;
+     align-items: center;
+     gap: 10px;
+ }
+
+ .prompt-output {
+     background: #f8fafc;
+     border: 2px solid #e2e8f0;
+     border-radius: 10px;
+     padding: 20px;
+     font-family: 'Courier New', monospace;
+     font-size: 0.95rem;
+     line-height: 1.6;
+     white-space: pre-wrap;
+     margin-bottom: 20px;
+ }
+
+ .copy-btn {
+     background: #48bb78;
+     color: white;
+     border: none;
+     padding: 10px 20px;
+     border-radius: 8px;
+     cursor: pointer;
+     font-weight: 600;
+     transition: all 0.3s ease;
+ }
+
+ .copy-btn:hover {
+     background: #38a169;
+ }
+
+ .copy-btn.copied {
+     background: #4299e1;
+ }
+
+ @media (max-width: 768px) {
+     .site-title {
+         font-size: 2.2rem;
+     }
+
+     .tabs-header {
+         flex-direction: column;
+     }
+
+     .type-selector {
+         grid-template-columns: 1fr;
+     }
+
+     .container {
+         padding: 15px;
+     }
+ }
